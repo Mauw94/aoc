@@ -1,7 +1,8 @@
 ﻿using aoc.Lib;
 List<Solution> solutions2015 =
 [
-    new aoc._2015.Day1(1, 2015, false)
+    new aoc._2015.Day1(1, 2015, false),
+    new aoc._2015.Day2(2, 2015, false)
 ];
 
 List<Solution> solutions2022 =
