@@ -1,0 +1,35 @@
+﻿using aoc.Lib;
+
+List<Solution> solutions2023 = new()
+{
+    new aoc._2023.Day1(1, 2023, false),
+    new aoc._2023.Day2(2, 2023, false),
+};
+
+Run(solutions2023);
+return;
+
+static void Run(List<Solution> solutions)
+{
+    Console.WriteLine("\nWelcome to Advent of Code!\n\n");
+
+    foreach (var solution in solutions)
+    {
+        Console.WriteLine("Year{0} ", solution.Year);
+        Console.WriteLine("Day{0} ", solution.Day);
+
+        Common.StartStopwatch();
+        Console.WriteLine("\tSolution part1: {0}", solution.SolvePart1());
+        Common.StopStopwatch();
+        Console.Write($"\tExecuted in {Common.TimeElapsed()} ms");
+
+        Console.WriteLine("\n");
+
+        Common.StartStopwatch();
+        Console.WriteLine("\tSolution part2: {0}", solution.SolvePart2());
+        Common.StopStopwatch();
+        Console.Write($"\tExecuted in {Common.TimeElapsed()} ms");
+
+        Console.WriteLine("\n");
+    }
+}
