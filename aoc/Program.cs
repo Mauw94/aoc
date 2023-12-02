@@ -1,11 +1,17 @@
 ﻿using aoc.Lib;
 
-List<Solution> solutions2023 = new()
-{
+List<Solution> solutions2022 =
+[
+    new aoc._2022.Day1(1, 2022, false)
+];
+
+List<Solution> solutions2023 =
+[
     new aoc._2023.Day1(1, 2023, false),
     new aoc._2023.Day2(2, 2023, false),
-};
+];
 
+// Run(solutions2022);
 Run(solutions2023);
 return;
 

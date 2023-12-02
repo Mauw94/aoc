@@ -2,7 +2,7 @@
 
 namespace aoc.Lib;
 
-public class Common
+public abstract class Common
 {
     private static Stopwatch _stopWatch;
 
