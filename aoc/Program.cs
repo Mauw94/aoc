@@ -1,4 +1,8 @@
 ﻿using aoc.Lib;
+List<Solution> solutions2015 =
+[
+    new aoc._2015.Day1(1, 2015, false)
+];
 
 List<Solution> solutions2022 =
 [
@@ -11,8 +15,9 @@ List<Solution> solutions2023 =
     new aoc._2023.Day2(2, 2023, false),
 ];
 
+Run(solutions2015);
 // Run(solutions2022);
-Run(solutions2023);
+// Run(solutions2023);
 return;
 
 static void Run(List<Solution> solutions)

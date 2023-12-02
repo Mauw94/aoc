@@ -3,12 +3,8 @@ using aoc.Lib;
 
 namespace aoc._2023;
 
-public class Day2 : Solution
+public class Day2(int day, int year, bool isTest) : Solution(day, year, isTest)
 {
-    public Day2(int day, int year, bool isTest) : base(day, year, isTest)
-    {
-    }
-
     public override object SolvePart1()
     {
         var games = new List<Game>();
