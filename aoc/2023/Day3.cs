@@ -1,4 +1,5 @@
-﻿using aoc.Lib;
+﻿using System.Runtime.CompilerServices;
+using aoc.Lib;
 
 namespace aoc._2023;
 
@@ -14,7 +15,10 @@ public class Day3(int day, int year, bool isTest) : Solution(day, year, isTest)
 
     public override object SolvePart2()
     {
-        throw new NotImplementedException();
+        ParseSchematic();
+        var gearRatios = FindAllGearRatios();
+
+        return gearRatios.Sum();
     }
 
     void ParseSchematic()
@@ -26,6 +30,100 @@ public class Day3(int day, int year, bool isTest) : Solution(day, year, isTest)
             {
                 Schematic.Add(new EnginePart(X: x, Y: y, C: Input[y][x]));
             }
+    }
+
+    List<long> FindAllGearRatios()
+    {
+        var gearRatios = new List<long>();
+        for (var x = 0; x < Dimensions.x; x++)
+            for (var y = 0; y < Dimensions.y; y++)
+            {
+                var symbol = GetSymbolAtPos(x, y);
+                if (symbol != '*') continue;
+
+                var numbers = FindAdjacentNumberParts(x, y);
+                if (numbers.Count >= 2)
+                    gearRatios.Add(numbers[0] * numbers[1]);
+            }
+
+        return gearRatios;
+    }
+
+    List<int> FindAdjacentNumberParts(int x, int y)
+    {
+        var adjacents = GetAdjacent(x, y);
+        var numberPartCoords = new List<(int x, int y)>();
+        var numbers = new List<int>();
+        var seen = new List<(int x, int y)>();
+
+        foreach (var adjacent in adjacents)
+        {
+            if (SymbolIsNumberPart(adjacent.C))
+            {
+                if (!numberPartCoords.Contains((adjacent.X, adjacent.Y)))
+                    numberPartCoords.Add((adjacent.X, adjacent.Y));
+            }
+        }
+
+        if (numberPartCoords.Count < 2) return numbers;
+
+        foreach (var numberPart in numberPartCoords)
+        {
+            if (seen.Contains((numberPart.x, numberPart.y))) continue;
+
+            seen.Add((numberPart.x, numberPart.y));
+
+            var numberParts = new List<string>
+            {
+                GetSymbolAtPos(numberPart.x, numberPart.y).ToString()
+            };
+
+            var xP = numberPart.x;
+            var yP = numberPart.y;
+
+            TraverseLeft(--xP, yP, numberParts, seen);
+
+            xP = numberPart.x + 1;
+            yP = numberPart.y;
+
+            TraverseRight(xP, yP, numberParts, seen);
+
+            var realNumber = int.Parse(string.Join("", numberParts));
+            numbers.Add(realNumber);
+        }
+
+        return numbers;
+    }
+
+    List<string> TraverseLeft(int x, int y, List<string> numberParts, List<(int, int)> seen)
+    {
+        seen.Add((x, y));
+        var symbol = GetSymbolAtPos(x, y);
+        if (!SymbolIsNumberPart(symbol)) return numberParts;
+
+        numberParts.Insert(0, symbol.ToString());
+
+        if (x - 1 >= 0)
+        {
+            return TraverseLeft(--x, y, numberParts, seen);
+        }
+
+        return numberParts;
+    }
+
+    List<string> TraverseRight(int x, int y, List<string> numberParts, List<(int, int)> seen)
+    {
+        seen.Add((x, y));
+        var symbol = GetSymbolAtPos(x, y);
+        if (!SymbolIsNumberPart(symbol)) return numberParts;
+
+        numberParts.Add(symbol.ToString());
+
+        if (x + 1 < Dimensions.x)
+        {
+            return TraverseRight(++x, y, numberParts, seen);
+        }
+        return numberParts;
     }
 
     List<int> FindAllNumberParts()
