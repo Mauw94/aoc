@@ -14,11 +14,12 @@ List<Solution> solutions2023 =
 [
     new aoc._2023.Day1(1, 2023, false),
     new aoc._2023.Day2(2, 2023, false),
+    new aoc._2023.Day3(3, 2023, false)
 ];
 
-Run(solutions2015);
+// Run(solutions2015);
 // Run(solutions2022);
-// Run(solutions2023);
+Run(solutions2023);
 return;
 
 static void Run(List<Solution> solutions)
