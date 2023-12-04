@@ -8,9 +8,6 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
     {
         var cards = ParseInput();
 
-        foreach (var card in cards)
-            card.ProductWinningNumbers();
-
         return cards.Select(x => x.ProductWinningNumbers()).Sum();
     }
 
