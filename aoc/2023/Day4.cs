@@ -13,13 +13,11 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
 
         return cards.Select(x => x.ProductWinningNumbers()).Sum();
     }
+
     public override object SolvePart2()
     {
         var cards = ParseInput();
-        var scratchCards = new Dictionary<int, int>();
-
-        foreach (var card in cards)
-            scratchCards.Add(card.CardId, 1);
+        var scratchCards = cards.ToDictionary(card => card.CardId, card => 1);
 
         foreach (var card in cards)
         {
@@ -28,10 +26,7 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
             {
                 var nextKey = card.CardId + 1 + i;
                 var copiesOfCard = scratchCards[card.CardId];
-                if (copiesOfCard > 1)
-                    scratchCards[nextKey] += 1 * copiesOfCard;
-                else
-                    scratchCards[nextKey]++;
+                scratchCards[nextKey] += copiesOfCard > 1 ? 1 * copiesOfCard : 1;
             }
         }
 
@@ -39,7 +34,7 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
         return total;
     }
 
-    List<Card> ParseInput()
+    private List<Card> ParseInput()
     {
         var cards = new List<Card>();
         var i = 0;
@@ -56,21 +51,13 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
         return cards;
     }
 
-    class Card(int cardId, List<int> set1, List<int> set2)
+    private class Card(int cardId, List<int> set1, List<int> set2)
     {
         public int CardId { get; set; } = cardId;
-        public List<int> Set1 { get; set; } = set1;
-        public List<int> Set2 { get; set; } = set2;
+        private List<int> Set1 { get; set; } = set1;
+        private List<int> Set2 { get; set; } = set2;
 
-        public int CountWinningNumbers()
-        {
-            var count = 0;
-            foreach (var nr in Set2)
-                if (Set1.Contains(nr))
-                    count++;
-
-            return count;
-        }
+        public int CountWinningNumbers() => Set2.Count(nr => Set1.Contains(nr));
 
         public int ProductWinningNumbers()
         {
