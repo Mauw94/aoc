@@ -29,8 +29,8 @@ static void Run(List<Solution> solutions)
 
     foreach (var solution in solutions)
     {
-        Console.WriteLine("Year{0} ", solution.Year);
-        Console.WriteLine("Day{0} ", solution.Day);
+        Console.WriteLine("Year {0}", solution.Year);
+        Console.WriteLine("Day {0}", solution.Day);
 
         Common.StartStopwatch();
         Console.WriteLine("\tSolution part1: {0}", solution.SolvePart1());
