@@ -29,14 +29,9 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
                 var nextKey = card.CardId + 1 + i;
                 var copiesOfCard = scratchCards[card.CardId];
                 if (copiesOfCard > 1)
-                {
-                    for (var j = 0; j < copiesOfCard; j++)
-                        scratchCards[nextKey]++;
-                }
+                    scratchCards[nextKey] += 1 * copiesOfCard;
                 else
-                {
                     scratchCards[nextKey]++;
-                }
             }
         }
 

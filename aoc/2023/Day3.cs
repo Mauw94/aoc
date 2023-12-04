@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using aoc.Lib;
+﻿using aoc.Lib;
 
 namespace aoc._2023;
 
