@@ -39,8 +39,8 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
             i++;
             var split = line.Split(":");
             var sets = split[1].Split("|");
-            var set1 = sets[0].Split(" ").Where(x => x != string.Empty).Select(int.Parse).ToList();
-            var set2 = sets[1].Split(" ").Where(x => x != string.Empty).Select(int.Parse).ToList();
+            var set1 = sets[0].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+            var set2 = sets[1].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
             cards.Add(new Card(i, set1, set2));
         }
 
@@ -53,20 +53,8 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
         private List<int> Set1 { get; set; } = set1;
         private List<int> Set2 { get; set; } = set2;
 
-        public int CountWinningNumbers() => Set2.Count(nr => Set1.Contains(nr));
+        public int CountWinningNumbers() => Set2.Count(Set1.Contains);
 
-        public int ProductWinningNumbers()
-        {
-            var product = 1;
-            var winningNumbers = CountWinningNumbers();
-
-            if (winningNumbers == 0)
-                return 0;
-
-            for (var i = 1; i < winningNumbers; i++)
-                product *= 2;
-
-            return product;
-        }
+        public int ProductWinningNumbers() => (int)Math.Pow(2, CountWinningNumbers() - 1);
     }
 }
