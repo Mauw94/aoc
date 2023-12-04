@@ -30,8 +30,7 @@ public class Day4(int day, int year, bool isTest) : Solution(day, year, isTest)
             }
         }
 
-        var total = scratchCards.Sum(x => x.Value);
-        return total;
+        return scratchCards.Sum(x => x.Value);
     }
 
     private List<Card> ParseInput()
