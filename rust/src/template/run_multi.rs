@@ -1,4 +1,4 @@
-use std::{collections::HashSet, fmt::format, io};
+use std::{collections::HashSet, io};
 
 use crate::template::{Day, ANSI_BOLD, ANSI_ITALIC, ANSI_RESET};
 

@@ -201,7 +201,7 @@ mod tests {
     }
 
     mod deserialization {
-        use crate::{day, template::timings::Timings};
+        use crate::{template::timings::Timings, day};
 
         #[test]
         fn handles_json_timings() {
@@ -238,9 +238,12 @@ mod tests {
     }
 
     mod serialization {
-        use super::get_mock_timings;
         use std::collections::HashMap;
+
         use tinyjson::JsonValue;
+
+        use crate::template::timings::tests::get_mock_timings;
+
 
         #[test]
         fn serializes_timings() {
@@ -261,10 +264,8 @@ mod tests {
     }
 
     mod is_day_complete {
-        use crate::{
-            day,
-            template::timings::{Timing, Timings},
-        };
+        use crate::{template::timings::{Timings, Timing}, day};
+
 
         #[test]
         fn handles_completed_days() {
@@ -310,12 +311,8 @@ mod tests {
     }
 
     mod merge {
-        use crate::{
-            day,
-            template::timings::{Timing, Timings},
-        };
+        use crate::{template::timings::{tests::get_mock_timings, Timings, Timing}, day};
 
-        use super::get_mock_timings;
 
         #[test]
         fn handles_disjunct_timings() {

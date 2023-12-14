@@ -1,4 +1,4 @@
-use aoc::template::commands::{all, download, read, scaffold, solve, time};
+use advent_of_code::template::commands::{all, download, read, scaffold, solve, time};
 use args::{parse, AppArguments};
 
 #[cfg(feature = "today")]
@@ -7,7 +7,7 @@ use advent_of_code::template::Day;
 use std::process;
 
 mod args {
-    use aoc::template::Day;
+    use advent_of_code::template::Day;
     use std::process;
 
     pub enum AppArguments {

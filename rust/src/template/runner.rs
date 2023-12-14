@@ -132,7 +132,7 @@ fn submit_result<T: Display>(
     result: T,
     day: Day,
     part: u8,
-) -> Option<Result<Output, aoc_cli::AoCCommandError>> {
+) -> Option<Result<Output, aoc_cli::AocCommandError>> {
     let args: Vec<String> = env::args().collect();
 
     if !args.contains(&"--submit".into()) {

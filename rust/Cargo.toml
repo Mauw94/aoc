@@ -1,11 +1,13 @@
 [package]
-name = "aoc"
+name = "advent_of_code"
 version = "0.1.0"
 edition = "2021"
 publish = false
-default-run = "aoc"
+default-run = "advent_of_code"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+doctest = false
 
 [profile.dhat]
 inherits = "release"
