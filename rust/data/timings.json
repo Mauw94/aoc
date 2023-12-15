@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "day": "01",
+      "total_nanos": 0,
+      "part_2": null,
+      "part_1": null
+    },
+    {
+      "part_1": null,
+      "total_nanos": 0,
+      "day": "02",
+      "part_2": null
+    }
+  ]
+}

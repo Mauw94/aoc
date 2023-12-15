@@ -109,7 +109,7 @@ fn build_args(command: &str, args: &[String], day: Day) -> Vec<String> {
 }
 
 fn call_aoc_cli(args: &[String]) -> Result<Output, AocCommandError> {
-    println!("Calling >aoc with: aoc {}", args.join(" "));
+    // println!("Calling >aoc with: aoc {}", args.join(" "));
     let output = Command::new("aoc")
         .args(args)
         .stdout(Stdio::inherit())
