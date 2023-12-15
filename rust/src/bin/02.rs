@@ -1,11 +1,60 @@
 advent_of_code::solution!(2);
 
-pub fn part_one(input: &str) -> Option<u32> {
-    None
+struct Game {
+    r_max: u32,
+    g_max: u32,
+    b_max: u32,
+}
+
+fn parse_game(line: &str) -> Option<Game> {
+    let mut game = Game {
+        r_max: 0,
+        g_max: 0,
+        b_max: 0,
+    };
+
+    line.split_once(": ")?
+        .1
+        .split([',', ';'])
+        .try_for_each(|roll| {
+            let (count, color) = roll.trim().split_once(' ')?;
+            let c = count.parse().ok()?;
+            match color.as_bytes().first()? {
+                b'r' => game.r_max = std::cmp::max(c, game.r_max),
+                b'g' => game.g_max = std::cmp::max(c, game.g_max),
+                b'b' => game.b_max = std::cmp::max(c, game.b_max),
+                _ => unreachable!(),
+            };
+            Some(())
+        });
+    Some(game)
+}
+
+pub fn part_one(input: &str) -> Option<usize> {
+    Some(
+        input
+            .lines()
+            .enumerate()
+            .filter_map(|(i, l)| {
+                parse_game(l).and_then(|game| {
+                    if game.r_max <= 12 && game.g_max <= 13 && game.b_max <= 14 {
+                        Some(i + 1)
+                    } else {
+                        None
+                    }
+                })
+            })
+            .sum(),
+    )
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    Some(
+        input
+            .lines()
+            .filter_map(|l| parse_game(l).map(|game| game.r_max * game.g_max * game.b_max))
+            .sum(),
+    )
 }
 
 #[cfg(test)]
@@ -15,12 +64,12 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(8));
     }
 
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(2286));
     }
 }
