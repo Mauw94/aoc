@@ -1,3 +1,5 @@
+#![allow(unused_imports)]
+
 use std::{collections::HashMap, fs, io::Error, str::FromStr};
 use tinyjson::JsonValue;
 
@@ -175,6 +177,7 @@ mod tests {
 
     use super::{Timing, Timings};
 
+    #[allow(dead_code)]
     fn get_mock_timings() -> Timings {
         Timings {
             data: vec![
@@ -201,7 +204,8 @@ mod tests {
     }
 
     mod deserialization {
-        use crate::{template::timings::Timings, day};
+        #[allow(dead_code)]
+        use crate::{day, template::timings::Timings};
 
         #[test]
         fn handles_json_timings() {
@@ -244,7 +248,6 @@ mod tests {
 
         use crate::template::timings::tests::get_mock_timings;
 
-
         #[test]
         fn serializes_timings() {
             let timings = get_mock_timings();
@@ -264,8 +267,10 @@ mod tests {
     }
 
     mod is_day_complete {
-        use crate::{template::timings::{Timings, Timing}, day};
-
+        use crate::{
+            day,
+            template::timings::{Timing, Timings},
+        };
 
         #[test]
         fn handles_completed_days() {
@@ -311,8 +316,10 @@ mod tests {
     }
 
     mod merge {
-        use crate::{template::timings::{tests::get_mock_timings, Timings, Timing}, day};
-
+        use crate::{
+            day,
+            template::timings::{tests::get_mock_timings, Timing, Timings},
+        };
 
         #[test]
         fn handles_disjunct_timings() {
