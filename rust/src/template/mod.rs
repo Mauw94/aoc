@@ -6,9 +6,9 @@ pub mod commands;
 pub mod runner;
 
 mod day;
+mod readme_benchmarks;
 mod run_multi;
 mod timings;
-mod readme_benchmarks;
 
 pub const ANSI_ITALIC: &str = "\x1b[3m";
 pub const ANSI_BOLD: &str = "\x1b[1m";
@@ -56,6 +56,34 @@ macro_rules! solution {
         fn main() {
             use $crate::template::runner::*;
             let input = $crate::template::read_file("inputs", DAY);
+            $( run_part($func, &input, DAY, $part); )*
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! example_solution {
+    ($day: expr) => {
+        $crate::example_solution!(@impl $day, [part_one, 1] [part_two, 2]);
+    };
+    ($day:expr, 1) => {
+        $crate::example_solution!(@impl $day, [part_one, 1]);
+    };
+    ($day:expr, 2) => {
+        $crate::example_solution!(@impl $day, [part_two, 2]);
+    };
+
+    (@impl $day:expr, $( [$func:expr, $part:expr] )*) => {
+        /// The current day.
+        const DAY: $crate::template::Day = $crate::day!($day);
+
+        #[cfg(feature = "dhat-heap")]
+        #[global_allocator]
+        static ALLOC: dhat::Alloc = dhat::Alloc;
+
+        fn main() {
+            use $crate::template::runner::*;
+            let input = $crate::template::read_file("examples", DAY);
             $( run_part($func, &input, DAY, $part); )*
         }
     };
